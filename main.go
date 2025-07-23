@@ -1,38 +1,24 @@
 package main
 
-import (
-	"golang_restful_api/app"
-	"golang_restful_api/controller"
-	"golang_restful_api/exception"
-	"golang_restful_api/helper"
-	"golang_restful_api/middleware"
-	"golang_restful_api/repository"
-	"golang_restful_api/service"
-	"net/http"
+// func main() {
 
-	"github.com/go-playground/validator/v10"
-	"github.com/julienschmidt/httprouter"
-)
+// 	db := app.NewDB()
+// 	validate := validator.New()
 
-func main() {
+// 	categoryRepository := repository.NewCategoryRepository()
+// 	categoryService := service.NewCategoryService(categoryRepository, db, validate)
+// 	categoryController := controller.NewCategoryController(categoryService)
 
-	db := app.NewDB()
-	validate := validator.New()
+// 	router := httprouter.New()
+// 	app.Router(router, categoryController)
 
-	categoryRepository := repository.NewCategoryRepository()
-	categoryService := service.NewCategoryService(categoryRepository, db, validate)
-	categoryController := controller.NewCategoryController(categoryService)
+// 	router.PanicHandler = exception.ErrorHandler
 
-	router := httprouter.New()
-	app.Router(router, categoryController)
+// 	server := http.Server{
+// 		Addr:    "localhost:3000",
+// 		Handler: middleware.NewLoggingMidleware(middleware.NewAuthMiddleware(router)),
+// 	}
 
-	router.PanicHandler = exception.ErrorHandler
-
-	server := http.Server{
-		Addr:    "localhost:3000",
-		Handler: middleware.NewAuthMiddleware(router),
-	}
-
-	err := server.ListenAndServe()
-	helper.PanicIfErr(err)
-}
+// 	err := server.ListenAndServe()
+// 	helper.PanicIfErr(err)
+// }
